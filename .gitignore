@@ -1,5 +1,13 @@
-# Node modules
-node_modules/
+# Ignore environment variables file
 .env
-# Other files or directories to ignore
-# ...
+
+# Ignore node modules directory
+node_modules/
+
+/# Add any other files or directories you want to ignore
+# .DS_Store
+# build/
+# dist/
+# coverage/
+# logs/
+# npm-debug.log*

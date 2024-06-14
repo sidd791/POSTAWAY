@@ -12,7 +12,7 @@ const generateAccessAndRefreshTokens = async (userID) => {
   const user = await User.findById(userID);
   const accessToken = user.generateAccessToken();
   const refreshToken = user.generateRefreshToken();
-  user.refreshToken = refreshToken;
+  user.refreshToken.push(refreshToken);
   await user.save({ validateBeforeSave: false });
   return { accessToken, refreshToken };
 };
@@ -87,11 +87,27 @@ export const signIn = asyncHandler(async (req, res) => {
 });
 
 export const signOut = asyncHandler(async (req, res) => {
-  await User.findAndUpdateById(
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $pull: {
+        refreshToken: req.cookies.refreshToken,
+      },
+    },
+    { new: true }
+  );
+  res
+  .status(201)
+  .clearCookie("accessToken", options)
+  .clearCookie("refreshToken", options)
+  .json(new ApiResponse(201, {}, "User logged out successfully."))
+});
+export const signOutOfAll = asyncHandler(async (req, res) => {
+  await User.findByIdAndUpdate(
     req.user._id,
     {
       set: {
-        refreshToken: undefined,
+        refreshToken: [],
       },
     },
     { new: true }

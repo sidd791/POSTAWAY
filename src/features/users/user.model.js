@@ -27,9 +27,9 @@ const userSchema = Schema(
       enum: ["male", "female"],
       required: [true, "Gender is required"],
     },
-    refreshToken: {
+    refreshToken: [{
       type: String,
-    },
+    }],
   },
   { timestamps: true }
 );
@@ -57,11 +57,13 @@ userSchema.methods.generateAccessToken = function () {
 };
 
 userSchema.methods.generateRefreshToken = function () {
-  return jwt.sign(
+  const token = jwt.sign(
     { _id: this._id },
     process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
-  );
+  )
+  this.refreshToken.push(token)
+  return token
 };
 
 export const User = mongoose.model("User", userSchema);

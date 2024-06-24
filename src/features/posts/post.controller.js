@@ -45,11 +45,12 @@ export const createPost = asyncHandler(async (req, res) => {
           imageUrl,
           caption,
       });
-      if (!post) {
-        console.log("error:", error)
-        throw new ApiError(404, "Error")
+      const newPost = await Post.findById(post._id)
+      if (!newPost) {
+        throw new ApiError(404, "Error in new Post")
       }
-      console.log(post)
-    res.status(201).json(post);
+      res.status(201).json(new ApiResponse(201, newPost, "Post created"))
+      
+    
 });
 

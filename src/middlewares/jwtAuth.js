@@ -26,8 +26,6 @@ const jwtVerify = asyncHandler(async (req, res, next) => {
 
         // Extract refresh token from cookies
         const userRefreshToken = req.cookies?.refreshToken;
-        console.log(userRefreshToken)
-        console.log(user.refreshToken)
         // Check if the refresh token is valid
         const validRefreshToken = user.refreshToken.some(rt => rt === userRefreshToken);
         if (!validRefreshToken) {
@@ -38,7 +36,7 @@ const jwtVerify = asyncHandler(async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
-        console.error("Error during token verification:", error); // Log the error for debugging
+        console.error("Error during token verification:", error);
         throw new ApiError(401, "Invalid token", error);
     }
 });

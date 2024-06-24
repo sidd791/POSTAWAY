@@ -97,10 +97,10 @@ export const signOut = asyncHandler(async (req, res) => {
     { new: true }
   );
   res
-  .status(201)
-  .clearCookie("accessToken", options)
-  .clearCookie("refreshToken", options)
-  .json(new ApiResponse(201, {}, "User logged out successfully."))
+    .status(201)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(201, {}, "User logged out successfully."));
 });
 export const signOutOfAll = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
@@ -113,8 +113,59 @@ export const signOutOfAll = asyncHandler(async (req, res) => {
     { new: true }
   );
   res
-  .status(201)
-  .clearCookie("accessToken", options)
-  .clearCookie("refreshToken", options)
-  .json(new ApiResponse(201, {}, "User logged out successfully."))
+    .status(201)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(201, {}, "User logged out successfully."));
+});
+
+export const getSingleUser = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findById(id).select("-password -refreshToken");
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+  res.status(200).json(new ApiResponse(200, user, "User found."));
+});
+
+export const getAllUsers = asyncHandler(async (req, res) => {
+  const allUsers = await User.findById({}).select("-password -refreshToken");
+  if (!allUsers) {
+    throw new ApiError(404, "No users found");
+  }
+  res.status(200).json(new ApiResponse(200, allUsers, "All users found"));
+});
+
+
+export const updateUser = asyncHandler(async (req, res) => {
+  const  id  = req.params.id;
+  const updateData = req.body;
+
+  // Validate if the update data contains empty fields
+  for (const key in updateData) {
+    if (typeof updateData[key] === "string" && updateData[key].trim() === "") {
+      throw new ApiError(400, `Field ${key} cannot be empty.`);
+    }
+  }
+
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  // Only update the fields that are provided
+  for (const key in updateData) {
+    if (updateData.hasOwnProperty(key)) {
+      user[key] = updateData[key];
+    }
+  }
+
+  await user.save({ validateBeforeSave: true });
+
+  const updatedUser = await User.findById(id).select("-password -refreshToken");
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, updatedUser, "User updated successfully"));
 });

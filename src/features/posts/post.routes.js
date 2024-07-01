@@ -18,7 +18,7 @@ postRouter
   .post(jwtVerify, upload.single("imageUrl"), createPost);
 postRouter.route("/:postId").get(getOnePost);
 postRouter.route("/").get(getPostByUserId);
-postRouter.route("/delete").post(jwtVerify, deletePost);
+postRouter.route("/delete/:postId").post(jwtVerify, deletePost);
 postRouter
   .route("/update")
   .post(jwtVerify, upload.single("imageUrl"), updatePost);

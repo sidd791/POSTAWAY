@@ -17,7 +17,16 @@ app.use(express.static("public"));
 
 import {userRouter} from "./src/features/users/user.routes.js"
 import {postRouter} from './src/features/posts/post.routes.js'
+import {commentRouter} from './src/features/comments/comment.routes.js'
+import { otpRouter } from "./src/features/otp/otp.routes.js";
+import { friendshipRouter } from "./src/features/friendships/friendship.routes.js";
+import {likeRouter} from "./src/features/likes/likes.router.js"
+
 app.use("/api/user", userRouter);
 app.use("/api/posts", postRouter);
+app.use("/api/comments", commentRouter);
+app.use("/otp", otpRouter)
+app.use("/friendship", friendshipRouter)
+app.use("/likes", likeRouter)
 
 export default app;

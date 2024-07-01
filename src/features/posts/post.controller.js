@@ -68,7 +68,7 @@ export const deletePost = asyncHandler(async (req, res) => {
   if (!userId) {
     throw new ApiError(404, "Error in finding post.");
   }
-  await post.delete();
+  await Post.findByIdAndDelete(postId);
   res.status(200).json(new ApiResponse(200, post, "Post deleted"));
 });
 

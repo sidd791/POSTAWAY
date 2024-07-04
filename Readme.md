@@ -33,6 +33,4 @@ The project is structured as follows:
 - `public/`: Static files served by the application
 - `src/`: Source code for the application
 
-## Postman
 
-Link to Routes : [Postman](https://api.postman.com/collections/34093212-144031cd-f80d-4159-879a-69232ffead74?access_key=PMAT-01J1XXYEMHBZ2NT2VG49T5EDQC)

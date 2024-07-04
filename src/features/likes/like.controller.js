@@ -9,6 +9,10 @@ export const toggleLike = asyncHandler(async(req, res)=>{
     const id = req.params.id
     const userId = req.user.id
     const {type} = req.query
+    console.log("id : ", id)
+    console.log("userId : ", userId)
+    console.log("type : ", type)
+
     if (!id || !userId || !type) {
         throw new ApiError(404, "Id or userId or type not foud")
     }
@@ -57,7 +61,7 @@ export const toggleLike = asyncHandler(async(req, res)=>{
             )
         }
     }
-    res.status(200).json(200, "Like Toggled")
+    res.status(200).json(new ApiResponse(200, "Toggled likes"))
 })
 
 export const getLikes = asyncHandler(async(req, res)=>{
@@ -66,5 +70,5 @@ export const getLikes = asyncHandler(async(req, res)=>{
     if (!like) {
         throw new ApiError(400, "Error in getting Like")
     }
-    res.status(200).json(200, like, "Get likes.")
+    res.status(200).json(new ApiResponse(200, like, "get likes"))
 })

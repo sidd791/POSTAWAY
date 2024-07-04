@@ -3,9 +3,8 @@ import ApiError from "../../utils/ApiError.js"
 import ApiResponse from "../../utils/ApiResponse.js"
 import asyncHandler from "../../utils/asyncHandler.js"
 import { OTP } from "./otp.schema.js"
-import dotenv from "dotenv"
 import { User } from "../users/user.model.js"
-dotenv.config()
+
 
 export const sendOtp = asyncHandler(async(req, res)=>{
     const otp = Math.floor(100000 + Math.random() * 900000)
@@ -19,8 +18,8 @@ export const sendOtp = asyncHandler(async(req, res)=>{
     const transporter = nodemailer.createTransport({
         service : "gmail",
         auth : {
-            user : process.env.EMAIL,
-            pass : process.env.PASS
+            user : "codingninjas2k16@gmail.com",
+            pass : "slwvvlczduktvhdj"
         } 
     })
     const mailOptions = {

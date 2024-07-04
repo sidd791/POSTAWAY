@@ -28,7 +28,8 @@ export const getOnePost = asyncHandler(async (req, res) => {
 export const createPost = asyncHandler(async (req, res) => {
   const { caption } = req.body;
   const userId = req.user._id;
-  const imageUrl = req.file?.path;
+  const imageUrl = req.file.path;
+
 
   // Log the request body and file for debugging
   console.log("Request Body:", req.body);
@@ -36,7 +37,7 @@ export const createPost = asyncHandler(async (req, res) => {
   console.log("Uploaded File:", req.file);
   // Basic validation
   if (!caption || !imageUrl || !userId) {
-    throw new ApiError(400, "ALl fields are required.");
+    throw new ApiError(400, "All fields are required.");
   }
 
   // Create a new post
@@ -80,7 +81,7 @@ export const updatePost = asyncHandler(async (req, res) => {
   if (!post) {
       throw new ApiError(404, "Post not found");
   }
-  if (post.userId.toString() !== userId.toString()) {
+  if (post.userId !== userId) {
       throw new ApiError(403, "Unauthorized");
   }
 

@@ -14,8 +14,8 @@ export const userRouter = Router();
 
 userRouter.route("/signup").post(registerUser);
 userRouter.route("/signin").post(signIn);
-userRouter.route("/logout").post(jwtVerify, signOut);
-userRouter.route("/logout-of-all-devices").post(jwtVerify, signOutOfAll);
-userRouter.route("/get-details/:id").post(jwtVerify, getSingleUser);
-userRouter.route("/get-all-details").post(jwtVerify, getAllUsers);
-userRouter.route("/update-details/:id").post(jwtVerify, updateUser);
+userRouter.route("/logout").get(jwtVerify, signOut);
+userRouter.route("/logout-all-devices").get(jwtVerify, signOutOfAll);
+userRouter.route("/get-details/:id").get(jwtVerify, getSingleUser);
+userRouter.route("/get-all-details").get(jwtVerify, getAllUsers);
+userRouter.route("/update-details/:id").put(jwtVerify, updateUser);

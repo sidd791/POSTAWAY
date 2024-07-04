@@ -19,7 +19,7 @@ export const createComment = asyncHandler(async(req, res)=>{
     }
     const post = await Post.findByIdAndUpdate(
         {_id : postId},
-        {$push : {postComments : comment.content}},
+        {$push : {postComments : comment._id}},
         {new : true}
     )
     if (!comment) {

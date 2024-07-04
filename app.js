@@ -22,11 +22,11 @@ import { otpRouter } from "./src/features/otp/otp.routes.js";
 import { friendshipRouter } from "./src/features/friendships/friendship.routes.js";
 import {likeRouter} from "./src/features/likes/likes.router.js"
 
-app.use("/api/user", userRouter);
+app.use("/api/users", userRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/comments", commentRouter);
-app.use("/otp", otpRouter)
-app.use("/friendship", friendshipRouter)
-app.use("/likes", likeRouter)
+app.use("/api/otp", otpRouter)
+app.use("/api/friends", friendshipRouter)
+app.use("/api/likes", likeRouter)
 
 export default app;

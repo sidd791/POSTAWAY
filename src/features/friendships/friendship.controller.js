@@ -5,7 +5,7 @@ import ApiResponse from "../../utils/ApiResponse.js";
 
 export const toggleFriendship = asyncHandler(async(req, res)=>{
     const userId  = req.user._id;
-    const friendId = req.params.id
+    const {friendId} = req.params
     if (userId === friendId) {
         throw new ApiError(400, "Cant send a friend req to yourself")
     }

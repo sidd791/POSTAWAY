@@ -13,7 +13,6 @@ export const otpSchema = new Schema({
   userEmail: {
     type: String,
     required: true,
-    unique: true, 
     lowercase: true, 
     validate: {
       validator: function (v) {

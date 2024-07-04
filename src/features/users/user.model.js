@@ -6,7 +6,6 @@ const userSchema = Schema(
   {
     username: {
       type: String,
-      required: [true, "Username is required"],
       unique: true,
     },
     email: {
@@ -24,8 +23,7 @@ const userSchema = Schema(
     },
     gender: {
       type: String,
-      enum: ["male", "female"],
-      required: [true, "Gender is required"],
+      enum: ["Male", "male","Female", "female"],
     },
     refreshToken: [{
       type: String,

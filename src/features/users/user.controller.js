@@ -34,7 +34,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
   const user = await User.create({
     email,
-    username: username.toLowerCase(),
+    username,
     password,
     gender,
   });
@@ -129,7 +129,7 @@ export const getSingleUser = asyncHandler(async (req, res) => {
 });
 
 export const getAllUsers = asyncHandler(async (req, res) => {
-  const allUsers = await User.findById({}).select("-password -refreshToken");
+  const allUsers = await User.find({}).select("-password -refreshToken");
   if (!allUsers) {
     throw new ApiError(404, "No users found");
   }

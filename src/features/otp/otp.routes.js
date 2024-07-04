@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { resetPassword, sendOtp, verifyOtp } from "./otp.controller";
+import { resetPassword, sendOtp, verifyOtp } from "./otp.controller.js";
 import jwtVerify from "../../middlewares/jwtAuth.js"
 export const otpRouter = Router()
 

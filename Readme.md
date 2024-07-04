@@ -13,12 +13,6 @@ This project is a REST API built with Node.js, Express, and MongoDB. It includes
 - Send friend requests to other users
 - Reset password via OTP verification
 
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/sidd791/POSTAWAY
 
 ## Project Structure
 
